@@ -15,7 +15,10 @@ This server allows you to extract text from images by sending base64-encoded ima
 
 Want to try the demo? You can test the OCR API at:
 
-**Demo Endpoint:** `POST https://ocr-server.novadev.my.id/ocr`
+**Demo Endpoint:** [https://ocr-server.novadev.my.id](https://ocr-server.novadev.my.id)
+
+- `GET /health`
+- `POST /ocr`
 
 To get an API key, please reach out through the contact section below. I'll be happy to provide you with access!
 
