@@ -42,6 +42,9 @@ jobs:
             ./docker/bash/fixperm.sh
             echo "INFO: Permission successfully set"
 
+            echo "--> Install pm2..."
+            npm install -g pm2
+
             echo "--> Run application..."
             npm run pm2:restart || npm run pm2:start
             pm2 startup
