@@ -1,0 +1,21 @@
+{
+  "name": "ocr-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "pm2:start": "pm2 start npm --name 'ocr-server' -- run start",
+    "pm2:stop": "pm2 stop ocr-server",
+    "pm2:restart": "pm2 restart ocr-server",
+    "pm2:delete": "pm2 delete ocr-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "uuid": "^13.0.0"
+  }
+}

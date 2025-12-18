@@ -1,0 +1,7 @@
+.env
+.env.production
+.env.local
+_env
+.vscode
+node_modules
+uploads
