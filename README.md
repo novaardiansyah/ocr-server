@@ -8,11 +8,8 @@ This server allows you to extract text from images by sending base64-encoded ima
 
 ## Dazzling Tech Stack! ⚡
 
-- [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [uuid](https://www.npmjs.com/package/uuid)
 
 ## Sneak Peek 🌟
 
@@ -156,9 +153,9 @@ Content-Type: application/json
 - `403 Forbidden` - Invalid API key
 - `500 Internal Server Error` - OCR processing failed
 
-## Credits 🙏
+## Thanks to 🙏
 
-This project is powered by the amazing [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) engine, an open-source OCR engine. Tesseract is licensed under the [Apache License 2.0](https://github.com/tesseract-ocr/tesseract?tab=Apache-2.0-1-ov-file).
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) Licensed under the [Apache License 2.0](https://github.com/tesseract-ocr/tesseract?tab=Apache-2.0-1-ov-file)
 
 ## Licensing Groove 🕺
 
