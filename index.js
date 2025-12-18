@@ -1,51 +1,47 @@
 import express from "express";
 import fs from "fs-extra";
-import { createWorker } from "tesseract.js";
+import { execFile } from "child_process";
 import { v4 as uuid } from "uuid";
 
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 
 app.post("/ocr", async (req, res) => {
-  const worker = null;
-
   try {
     const { base64, lang = "eng" } = req.body;
+    if (!base64) return res.status(400).json({ error: "base64 required" });
 
-    if (!base64) {
-      return res.status(400).json({ error: "base64 image required" });
-    }
+    const buffer = Buffer.from(
+      base64.replace(/^data:image\/\w+;base64,/, ""),
+      "base64"
+    );
 
-    console.log(`[OCR] language: ${lang}`);
+    const input = `/tmp/${uuid()}.png`;
+    const output = `/tmp/${uuid()}`;
 
-    // clean base64 header if exists
-    const imageBase64 = base64.replace(/^data:image\/\w+;base64,/, "");
-    const buffer = Buffer.from(imageBase64, "base64");
+    await fs.writeFile(input, buffer);
 
-    const filename = `/tmp/${uuid()}.png`;
-    await fs.writeFile(filename, buffer);
+    execFile(
+      "tesseract",
+      [input, output, "-l", lang],
+      async (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "OCR failed" });
+        }
 
-    const worker = await createWorker({
-      lang,
-      logger: m => console.log(`[OCR ${lang}]`, m.status),
-    });
+        const text = await fs.readFile(`${output}.txt`, "utf8");
 
-    const {
-      data: { text },
-    } = await worker.recognize(filename);
+        await fs.remove(input);
+        await fs.remove(`${output}.txt`);
 
-    await worker.terminate();
-    await fs.remove(filename);
-
-    res.json({ text });
-
-  } catch (err) {
-    console.error(err);
-    if (worker) await worker.terminate();
+        res.json({ text });
+      }
+    );
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "OCR failed" });
   }
 });
 
-app.listen(6103, () => {
-  console.log("OCR API running on port 6103");
-});
+app.listen(6103, () => console.log("OCR API running on 6103"));
