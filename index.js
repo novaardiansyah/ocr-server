@@ -6,7 +6,24 @@ import { v4 as uuid } from "uuid";
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 
-const worker = await createWorker("eng");
+// Cache worker per language
+const workers = new Map();
+
+async function getWorker(lang) {
+  if (workers.has(lang)) {
+    return workers.get(lang);
+  }
+
+  console.log(`Creating OCR worker for language: ${lang}`);
+
+  const worker = await createWorker({
+    lang,
+    logger: m => console.log(`[OCR ${lang}]`, m.status),
+  });
+
+  workers.set(lang, worker);
+  return worker;
+}
 
 app.post("/ocr", async (req, res) => {
   try {
@@ -16,13 +33,17 @@ app.post("/ocr", async (req, res) => {
       return res.status(400).json({ error: "base64 image required" });
     }
 
-    const buffer = Buffer.from(base64, "base64");
+    // Remove data:image/...;base64,
+    const cleanBase64 = base64.includes(",")
+      ? base64.split(",")[1]
+      : base64;
+
+    const buffer = Buffer.from(cleanBase64, "base64");
     const filename = `/tmp/${uuid()}.png`;
 
     await fs.writeFile(filename, buffer);
 
-    await worker.loadLanguage(lang);
-    await worker.initialize(lang);
+    const worker = await getWorker(lang);
 
     const {
       data: { text },
@@ -30,9 +51,12 @@ app.post("/ocr", async (req, res) => {
 
     await fs.remove(filename);
 
-    res.json({ text });
+    res.json({
+      lang,
+      text: text.trim(),
+    });
   } catch (err) {
-    console.error(err);
+    console.error("OCR ERROR:", err);
     res.status(500).json({ error: "OCR failed" });
   }
 });
