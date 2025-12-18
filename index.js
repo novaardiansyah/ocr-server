@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const API_KEY = process.env.API_KEY;
-const PORT = process.env.PORT || 6103;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ limit: "10mb" }));
 

@@ -6,4 +6,3 @@ _env
 node_modules
 uploads
 docker/apache-proxy.conf
-.agent/*
