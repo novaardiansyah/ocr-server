@@ -172,7 +172,7 @@ We believe in fostering a welcoming and inclusive environment for everyone. Plea
 
 ## Project Status 🚀
 
-![stages](https://img.shields.io/badge/stages-development-informational)
+![stages](https://img.shields.io/badge/stages-production-informational)
 [![information](https://img.shields.io/badge/information-references-informational)](references.json)
 ![size](https://img.shields.io/github/repo-size/novaardiansyah/ocr-server?label=size&color=informational)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
