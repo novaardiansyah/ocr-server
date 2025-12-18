@@ -5,3 +5,4 @@ _env
 .vscode
 node_modules
 uploads
+docker/apache-proxy.conf
