@@ -1,46 +1,39 @@
-const express = require("express");
-const fs = require("fs");
-const { exec } = require("child_process");
-const { v4: uuidv4 } = require("uuid");
+import express from "express";
+import fs from "fs-extra";
+import { createWorker } from "tesseract.js";
+import { v4 as uuid } from "uuid";
 
 const app = express();
 app.use(express.json({ limit: "10mb" }));
 
+const worker = await createWorker("eng");
+
 app.post("/ocr", async (req, res) => {
   try {
-    const { image_base64, lang = "eng" } = req.body;
+    const { base64, lang = "eng" } = req.body;
 
-    if (!image_base64) {
-      return res.status(400).json({ error: "image_base64 required" });
+    if (!base64) {
+      return res.status(400).json({ error: "base64 image required" });
     }
 
-    const id = uuidv4();
-    const imagePath = `uploads/${id}.png`;
-    const outputPath = `uploads/${id}`;
+    const buffer = Buffer.from(base64, "base64");
+    const filename = `/tmp/${uuid()}.png`;
 
-    // Decode base64 → image file
-    const buffer = Buffer.from(image_base64, "base64");
-    fs.writeFileSync(imagePath, buffer);
+    await fs.writeFile(filename, buffer);
 
-    // Run tesseract
-    exec(
-      `tesseract ${imagePath} ${outputPath} -l ${lang}`,
-      (err) => {
-        if (err) {
-          return res.status(500).json({ error: "OCR failed" });
-        }
+    await worker.loadLanguage(lang);
+    await worker.initialize(lang);
 
-        const text = fs.readFileSync(`${outputPath}.txt`, "utf8");
+    const {
+      data: { text },
+    } = await worker.recognize(filename);
 
-        // Cleanup
-        fs.unlinkSync(imagePath);
-        fs.unlinkSync(`${outputPath}.txt`);
+    await fs.remove(filename);
 
-        res.json({ text });
-      }
-    );
-  } catch (e) {
-    res.status(500).json({ error: "Server error" });
+    res.json({ text });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "OCR failed" });
   }
 });
 

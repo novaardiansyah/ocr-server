@@ -15,7 +15,9 @@
   "description": "",
   "dependencies": {
     "express": "^5.2.1",
+    "fs-extra": "^11.3.2",
     "multer": "^2.0.2",
+    "tesseract.js": "^7.0.0",
     "uuid": "^13.0.0"
   }
 }
