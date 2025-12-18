@@ -34,15 +34,8 @@ jobs:
             git checkout production
             git pull origin production
             
-            echo "--> Clear build cache..."
-            rm -rf node_modules/.bin/next
-            rm -rf .next
-
             echo "--> Install dependencies..."
             npm ci
-
-            echo "--> Build application..."
-            npm run build
 
             echo "--> Set permission..."
             chmod +x ./docker/bash/fixperm.sh
