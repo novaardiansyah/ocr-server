@@ -2,7 +2,7 @@
 
 Hi Future Developer,
 
-Welcome to the **Tesseract OCR Server**! This project is a simple and efficient OCR (Optical Character Recognition) API server built with Node.js and Express.js, powered by Tesseract OCR engine.
+Welcome to the **Tesseract OCR Server**! This project is a simple and efficient OCR (Optical Character Recognition) API server built with Node.js and Express.js, powered by [Tesseract OCR engine](https://github.com/tesseract-ocr/tesseract).
 
 This server allows you to extract text from images by sending base64-encoded image data through a REST API. It's designed for easy integration with other applications that need OCR capabilities.
 
@@ -10,17 +10,6 @@ This server allows you to extract text from images by sending base64-encoded ima
 
 - [Express.js](https://expressjs.com/)
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
-
-## Sneak Peek 🌟
-
-Want to try the demo? You can test the OCR API at:
-
-**Demo Endpoint:** [https://ocr-server.novadev.my.id](https://ocr-server.novadev.my.id)
-
-- `GET /health`
-- `POST /ocr`
-
-To get an API key, please reach out through the contact section below. I'll be happy to provide you with access!
 
 ## Installation Guide 🛠️
 
@@ -156,9 +145,20 @@ Content-Type: application/json
 - `403 Forbidden` - Invalid API key
 - `500 Internal Server Error` - OCR processing failed
 
-## Thanks to 🙏
+## Sneak Peek 🌟
 
-- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) Licensed under the [Apache License 2.0](https://github.com/tesseract-ocr/tesseract?tab=Apache-2.0-1-ov-file)
+Want to try the demo? You can test the OCR API at:
+
+**Demo Endpoint:** [https://ocr-server.novadev.my.id](https://ocr-server.novadev.my.id)
+
+- `GET /health`
+- `POST /ocr`
+
+To get an API key, please reach out through the contact section below. I'll be happy to provide you with access!
+
+## Let's Connect! 📞
+
+Need to chat? Feel free to drop me a line via [Email](mailto:novaardiansyah78@gmail.com) or hit me up on [WhatsApp](https://wa.me/6289506668480?text=Hi%20Nova,%20I%20have%20a%20question%20about%20your%20project%20on%20GitHub:%20https://github.com/novaardiansyah/ocr-server). I'm just a message away, ready to groove with you! 📩
 
 ## Licensing Groove 🕺
 
@@ -170,17 +170,17 @@ Feel free to use, modify, and share it with the world. Just remember to keep the
 
 We believe in fostering a welcoming and inclusive environment for everyone. Please be respectful, considerate, and constructive in all interactions. By participating in this project, you agree to uphold our [Code of Conduct](CODE_OF_CONDUCT.md). Let's collaborate and make this community awesome together!
 
-## Let's Connect! 📞
-
-Need to chat? Feel free to drop me a line via [Email](mailto:novaardiansyah78@gmail.com) or hit me up on [WhatsApp](https://wa.me/6289506668480?text=Hi%20Nova,%20I%20have%20a%20question%20about%20your%20project%20on%20GitHub:%20https://github.com/novaardiansyah/ocr-server). I'm just a message away, ready to groove with you! 📩
-
 ## Project Status 🚀
 
-![stages](https://img.shields.io/badge/stages-development-informational)
+![stages](https://img.shields.io/badge/stages-production-informational)
 [![information](https://img.shields.io/badge/information-references-informational)](references.json)
 ![size](https://img.shields.io/github/repo-size/novaardiansyah/ocr-server?label=size&color=informational)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![last commit](https://img.shields.io/github/last-commit/novaardiansyah/ocr-server?label=last%20commit&color=informational)](commits/main)
+
+## Thanks to 🙏
+
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) Licensed under the [Apache License 2.0](https://github.com/tesseract-ocr/tesseract?tab=Apache-2.0-1-ov-file)
 
 ---
 
